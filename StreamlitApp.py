@@ -2,6 +2,7 @@
 import streamlit as st
 from PIL import Image, ImageDraw, ImageGrab
 import numpy as np
+from io import StringIO
 
 
 
@@ -67,11 +68,8 @@ import numpy as np
 #     return binary_image
     
 
-
-
-
-def main():
-
+def take_image():
+      
     img_file_buffer = st.camera_input("Take a photo")
 
     if img_file_buffer is not None:
@@ -83,6 +81,26 @@ def main():
         picture = "im.jpg"
 
         img.save(picture)
+
+def file_upload():
+
+    img_saved = st.file_uploader('upload a file')
+    if img_saved is not None:
+
+        bytes_data = img_saved.getvalue()
+        st.write(bytes_data)
+
+        # To convert to a string based IO:
+        stringio = StringIO(img_saved.getvalue().decode("utf-8"))
+        st.write(stringio)
+
+        # To read file as string:
+        string_data = stringio.read()
+        st.write(string_data)
+
+
+def main():
+        file_upload()
 
         # res = model(picture)
         
