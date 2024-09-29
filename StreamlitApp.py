@@ -2,7 +2,6 @@
 import streamlit as st
 from PIL import Image, ImageDraw, ImageGrab
 import numpy as np
-from inference_sdk import InferenceHTTPClient
 
 
 
