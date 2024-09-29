@@ -38,14 +38,18 @@ def file_upload():
 
     img_saved = st.file_uploader('upload an image file', type = ['png', 'jpg'])
 
+    image_types = ['image/jpeg', 'image/png' 'image/jpg']
+
+
     if img_saved is not None:
 
         print(img_saved.type)
 
-        process_image(img_saved)
-        
-             
 
+        if img_saved.type in image_types:
+
+            process_image(img_saved)
+        
 
 
         # bytes_data = img_saved.getvalue()
