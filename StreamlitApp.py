@@ -121,10 +121,6 @@ def main():
 
         # draw.rectangle((x, y, x + w, y + h), outline = 'red', width = 2)
 
-        st.image(img)
-
-
-
         # img = img.convert('RBGA')
 
         # rectangles = [
