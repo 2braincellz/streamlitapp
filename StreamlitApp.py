@@ -1,72 +1,71 @@
 
 import streamlit as st
-import cv2
 from PIL import Image, ImageDraw, ImageGrab
 import numpy as np
 from inference_sdk import InferenceHTTPClient
 
 
 
-def model(picture) -> list:
-    # initialize the client
-    CLIENT = InferenceHTTPClient(
-        api_url="https://detect.roboflow.com",
-        api_key="U56nnxvhT8UmyFW19P8U"
-    )
+# def model(picture) -> list:
+#     # initialize the client
+#     CLIENT = InferenceHTTPClient(
+#         api_url="https://detect.roboflow.com",
+#         api_key="U56nnxvhT8UmyFW19P8U"
+#     )
 
-    # infer on a local image
-    result = CLIENT.infer(picture, model_id="mhacks/1")
+#     # infer on a local image
+#     result = CLIENT.infer(picture, model_id="mhacks/1")
 
-    return result;
-
-
-def processing(picture) -> int:
-
-    image = cv2.imread(picture, cv2.IMREAD_GRAYSCALE)
-
-    x, y, w, h = 100, 100, 100, 100
-    threshold_value = 200
-    max_value = 255
-
-    # _, binary_image = cv2.threshold(image, threshold_value, max_value, cv2.THRESH_BINARY)
-
-    st.image(binary(image))
-    contour_images, hierarchy = cv2.findContours(image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#     return result;
 
 
-    for contour in contour_images:
-        perimeter = cv2.arcLength(contour, True)
+# def processing(picture) -> int:
 
-        st.write(perimeter)
-        dims = cv2.approxPolyDP(contour, 0.02 * perimeter, True)
+#     image = cv2.imread(picture, cv2.IMREAD_GRAYSCALE)
+
+#     x, y, w, h = 100, 100, 100, 100
+#     threshold_value = 200
+#     max_value = 255
+
+#     # _, binary_image = cv2.threshold(image, threshold_value, max_value, cv2.THRESH_BINARY)
+
+#     st.image(binary(image))
+#     contour_images, hierarchy = cv2.findContours(image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+
+#     for contour in contour_images:
+#         perimeter = cv2.arcLength(contour, True)
+
+#         st.write(perimeter)
+#         dims = cv2.approxPolyDP(contour, 0.02 * perimeter, True)
 
 
 
-        # st.write(type(dims[0]))
-        if len(dims) == 4:
-            x, y, w, h = cv2.boundingRect(dims)
-            st.write([x, y, w, h])
+#         # st.write(type(dims[0]))
+#         if len(dims) == 4:
+#             x, y, w, h = cv2.boundingRect(dims)
+#             st.write([x, y, w, h])
             
-            # cv2.drawContours(picture, [dims], -1, (0, 255, 0), 3)
-            # cv2.putText(
-            #     image,
-            #     "rectange", 
-            #     (x, y-10),
-            #     (cv2.FONT_HERSHEY_SIMPLEX), 
-            #     0.5,
-            #     (0, 255, 0),
-            #     2,
-            # )
+#             # cv2.drawContours(picture, [dims], -1, (0, 255, 0), 3)
+#             # cv2.putText(
+#             #     image,
+#             #     "rectange", 
+#             #     (x, y-10),
+#             #     (cv2.FONT_HERSHEY_SIMPLEX), 
+#             #     0.5,
+#             #     (0, 255, 0),
+#             #     2,
+#             # )
 
-    # st.image(contour_image)
+#     # st.image(contour_image)
 
-    # st.image(image)
-    return x, y, w, h
+#     # st.image(image)
+#     return x, y, w, h
 
-def binary(image):
-    threshold_value, max_value = 150, 255;
-    _, binary_image = cv2.threshold(image, threshold_value, max_value, cv2.THRESH_BINARY)
-    return binary_image
+# def binary(image):
+#     threshold_value, max_value = 150, 255;
+#     _, binary_image = cv2.threshold(image, threshold_value, max_value, cv2.THRESH_BINARY)
+#     return binary_image
     
 
 
