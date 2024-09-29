@@ -82,6 +82,13 @@ def take_image():
 
         img.save(picture)
 
+        
+        img_array = np.array(img)
+
+        st.write(type(img_array))
+        st.write(img_array.shape)
+
+
 def file_upload():
 
     img_saved = st.file_uploader('upload a file')
@@ -139,13 +146,6 @@ def main():
 
         # print(type(img))
 
-
-        img_array = np.array(img)
-
-
-
-        st.write(type(img_array))
-        st.write(img_array.shape)
 
 
 
